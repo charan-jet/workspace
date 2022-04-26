@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/charan-jet/workspace.git/static/css/main.c2e0848d.css",
+    "main.js": "/charan-jet/workspace.git/static/js/main.f64d7933.js",
+    "static/media/primeicons.svg": "/charan-jet/workspace.git/static/media/primeicons.c6e2053303524e39530c.svg",
+    "static/media/primeicons.eot": "/charan-jet/workspace.git/static/media/primeicons.7fc4d8e224d1ff1b9c62.eot",
+    "static/media/primeicons.woff": "/charan-jet/workspace.git/static/media/primeicons.449aa8c65cdc5c2a8686.woff",
+    "static/media/primeicons.ttf": "/charan-jet/workspace.git/static/media/primeicons.91bacab1f083f2795272.ttf",
+    "index.html": "/charan-jet/workspace.git/index.html",
+    "main.c2e0848d.css.map": "/charan-jet/workspace.git/static/css/main.c2e0848d.css.map",
+    "main.f64d7933.js.map": "/charan-jet/workspace.git/static/js/main.f64d7933.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c2e0848d.css",
+    "static/js/main.f64d7933.js"
+  ]
+}
