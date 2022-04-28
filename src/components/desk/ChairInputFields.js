@@ -13,7 +13,6 @@ const ChairInputFields = (props) => {
     })
 
     const [chairStatus , setChairStatus] = useState(null)
-    
     const handleInput = (e) =>{
         setInputValue({
             ...inputValue,

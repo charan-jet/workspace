@@ -11,11 +11,11 @@ import Navbar from "./Navbar"
 const MasterContainer = () => {
     const allUsers = localStorage.getItem("users")
     const loadedUsers = JSON.parse(allUsers)
-    const[userDetails] = useState([loadedUsers])
+    const[userDetails] = useState(loadedUsers)
 
     const allDesks = localStorage.getItem("allDesks")
     const loadedDesks = JSON.parse(allDesks)
-    const [deskDetails] = useState([loadedDesks])
+    const [deskDetails] = useState(loadedDesks)
     //const [deskDetails,setDeskDetails] = useState([])
 
     return(

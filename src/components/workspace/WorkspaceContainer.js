@@ -8,7 +8,6 @@ import AssignChairForm from './AssingChairForm'
 const WokrspaceContainer = (props) => {
     const users = props.users;
     const desks = props.desks;
-    console.log(users, desks)
     
     const [visibility,setVisibility] = useState(false)
 
@@ -25,7 +24,7 @@ const WokrspaceContainer = (props) => {
             <Card>
                 <Button label="Assign Chair" className="p-button-success" onClick={showModal} style={{marginBottom:"20px"}}/>
                 <Dialog visible={visibility} onHide={hideModal}>
-                    <AssignChairForm/>
+                    <AssignChairForm users={users} desks={desks}/>
                 </Dialog>
                 <Workspace/>
 

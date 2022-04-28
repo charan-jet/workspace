@@ -1,9 +1,25 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import {InputText} from 'primereact/inputtext'
 import {Button} from 'primereact/button'
-const AssignChairForm = () => {
+import {Dropdown} from 'primereact/dropdown'
+
+
+const AssignChairForm = (props) => {
+
+    const desks = props.desks
+    const users = props.users
 
     const [inputValues,setInputValues]=useState()
+    const [chairsList , setChairList] =useState([{label : ""}])
+    const chairNumbers = desks.map((items) => items.chairNumber)
+    
+    
+    useEffect(()=>{
+        chairNumbers.map((items)=>{
+            const  newChairNumber = {label : items}
+            setChairList([...chairsList,newChairNumber])
+        })
+    },[chairNumbers])
 
     return(
         <>
@@ -11,14 +27,11 @@ const AssignChairForm = () => {
                 <div style={{marginBottom:"10px"}}>
                     <label htmlFor="chairNum">Chair Number</label>
                     <InputText id="chairNum" className="p-inputtext-sm" name="chairNumber" value={inputValues}/>
-                </div>
+                    <Dropdown id="chairNum"  className="p-inputtext-sm"  name="chairNumber" value={inputValues} />
+                </div>  
                 <div style={{marginBottom:"10px"}}>
                     <label htmlFor="userName">User Name</label>
                     <InputText id="userName" className="p-inputtext-sm" name="chairNumber" value={inputValues}/>
-                </div>
-                <div style={{marginBottom:"10px"}}>
-                    <label htmlFor="chairStat">Chair Status</label>
-                    <InputText id="chairStat" className="p-inputtext-sm" name="chairNumber" value={inputValues}/>
                 </div>
                 <div style={{marginBottom:"10px"}}>
                     <label htmlFor="chairvalid">Valid Upto</label>
