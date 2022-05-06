@@ -9,20 +9,8 @@ import UsersTable from "./UsersTable"
 
 const FormContainer = () => {
     const [details , setDetails] = useState([]);    
-
-    const addDetails = (inputValue) => {
-        if(inputValue.fname !=="" && inputValue.email !==""){
-            const newDetails = {
-                fname : inputValue.fname,
-                lname : inputValue.lname,
-                email : inputValue.email
-            }
-            setDetails([...details,newDetails])
-        }
-        else{
-            alert("First Name and Email Id is required")
-        }
-    }   
+    const [editing , setEditing] =useState(false)
+    const [userData , setUserData] = useState([])
 
     useEffect(()=>{
         const allUsers = localStorage.getItem("users")
@@ -50,6 +38,13 @@ const FormContainer = () => {
         setVisibilty(false)
     }
 
+    const addUser = () =>{
+        showModal()
+        setEditing(false)
+    }
+
+  
+
     const closeModal = (inputValue) =>{
         if(inputValue.fname ==="" && inputValue.emial ===""){
             showModal()
@@ -59,15 +54,58 @@ const FormContainer = () => {
         }
     }
 
+    
+    const addDetails = (inputValue) => {
+        if(editing === false){
+            if(inputValue.fname !=="" && inputValue.email !==""){
+                const newDetails = {
+                    fname : inputValue.fname,
+                    fatherName : inputValue.fatherName,
+                    //dob : null,
+                    gender : inputValue.gender,
+                    mobile : inputValue.mobile,
+                    email : inputValue.email,
+                    aadhar : inputValue.aadhar
+                }
+                setDetails([...details,newDetails])
+            }
+            else{
+                alert("First Name and Email Id is required")
+            }
+        }
+        else{
+            let oldState = [...details]
+
+            let editedUser = oldState.filter(items => {
+                return items.email === inputValue.email
+            })
+
+            console.log(editedUser)
+
+        }
+    }   
+
+    const getDetails = (editingRowData) => {
+        setEditing(true)
+        setUserData(editingRowData)
+    }
+
+    const deleteUser = (userId) => {
+       setDetails( details.filter(users=>{
+        return userId !== users
+    }))
+    }
+
+
     return(
         <div>   
             
             <Card>
-                <Button label="Add User" className="p-button-success" onClick={showModal}/>   
+                <Button label="Add User" className="p-button-success" onClick={addUser}/>   
                 <Dialog header="Add User" visible={visibile} modal="true" onHide={hideModal} draggable={false}>
-                    <InputFields users={details} addUsers={addDetails} closeModal={closeModal}/>
+                    <InputFields users={details} editingUser={userData} editMode={editing}  addUsers={addDetails} closeModal={closeModal}/>
                 </Dialog>
-                <UsersTable users={details}/>
+                <UsersTable users={details}  getUser={getDetails} showModal={showModal} deleteUser={deleteUser}/>
             </Card>
         </div>
     )

@@ -1,41 +1,44 @@
 import React,{useEffect, useState} from 'react'
-import {InputText} from 'primereact/inputtext'
 import {Button} from 'primereact/button'
 import {Dropdown} from 'primereact/dropdown'
-
+import {Calendar} from 'primereact/calendar'
+    
 
 const AssignChairForm = (props) => {
 
     const desks = props.desks
     const users = props.users
 
-    const [inputValues,setInputValues]=useState()
-    const [chairsList , setChairList] =useState([{label : ""}])
-    const chairNumbers = desks.map((items) => items.chairNumber)
-    
-    
-    useEffect(()=>{
-        chairNumbers.map((items)=>{
-            const  newChairNumber = {label : items}
-            setChairList([...chairsList,newChairNumber])
+    const [inputValues,setInputValues]=useState({
+            chairNumber : null,
+            userName : null,
+            chairvalidity  :null
         })
-    },[chairNumbers])
 
-    return(
+    const usersList = users.map(items=>items.fname)
+    const chairList = desks.map((items)=>items.chairNumber)
+    
+    const handleSelect = (e) => {
+        console.log(e.target.name,e.target.value)
+        setInputValues({
+            ...inputValues,
+            [e.target.name] : e.value
+        })
+    }
+    return( 
         <>
             <form>
                 <div style={{marginBottom:"10px"}}>
-                    <label htmlFor="chairNum">Chair Number</label>
-                    <InputText id="chairNum" className="p-inputtext-sm" name="chairNumber" value={inputValues}/>
-                    <Dropdown id="chairNum"  className="p-inputtext-sm"  name="chairNumber" value={inputValues} />
+                    <label htmlFor="chairNum" >Chair Number</label>
+                    <Dropdown id="chairNum" options={chairList} className="p-inputtext-sm"  name="chairNumber" value={inputValues.chairNumber} onChange={handleSelect} style={{marginTop:"5px"}}/>
                 </div>  
                 <div style={{marginBottom:"10px"}}>
                     <label htmlFor="userName">User Name</label>
-                    <InputText id="userName" className="p-inputtext-sm" name="chairNumber" value={inputValues}/>
+                    <Dropdown id="userName" options={usersList} className="p-inputtext-sm"  name="userName" value={inputValues.userName} onChange={handleSelect} style={{marginTop:"5px"}}/>
                 </div>
                 <div style={{marginBottom:"10px"}}>
                     <label htmlFor="chairvalid">Valid Upto</label>
-                    <InputText id="chairValid" className="p-inputtext-sm" name="chairNumber" value={inputValues}/>
+                    <Calendar className="form-input" id="chairValid" name="chairvalidity"  value={inputValues.chairvalidity} onChange={handleSelect} style={{marginTop:"5px"}} showIcon />
                 </div>
                 <div style={{marginTop:"20px"}}>
                     <Button label="Submit" className="p-button-success"/>
