@@ -23,8 +23,8 @@ const UsersTable = (props) =>{
         )
     }) */
 
-    const editUser = (rowData,e) => {
-        props.getUser(rowData,e)
+    const editUser = (rowData,id) => {
+        props.getUser(rowData)
         props.showModal()
     }
 
@@ -35,7 +35,7 @@ const UsersTable = (props) =>{
     const actionBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
-                <Button icon="pi pi-pencil" className="p-button-text mr-2 p-button-warning p-button-rounded p-button-sm" onClick={(e)=>editUser(rowData,e)}/>
+                <Button icon="pi pi-pencil" className="p-button-text mr-2 p-button-warning p-button-rounded p-button-sm" onClick={(e)=>editUser(rowData)}/>
                 <Button icon="pi pi-trash" className="p-button-text p-button-danger p-button-rounded p-button-sm" onClick={(e)=>removeUser(rowData)}/>
             </React.Fragment>
         );

@@ -4,6 +4,7 @@ import { Dialog } from 'primereact/dialog'
 import {Button} from 'primereact/button'         
 import InputFields from "./InputFields"
 import UsersTable from "./UsersTable"
+
 //import Navbar from "./Navbar"
 
 
@@ -56,38 +57,39 @@ const FormContainer = () => {
 
     
     const addDetails = (inputValue) => {
-        if(editing === false){
-            if(inputValue.fname !=="" && inputValue.email !==""){
-                const newDetails = {
-                    fname : inputValue.fname,
-                    fatherName : inputValue.fatherName,
-                    //dob : null,
-                    gender : inputValue.gender,
-                    mobile : inputValue.mobile,
-                    email : inputValue.email,
-                    aadhar : inputValue.aadhar
+            if(editing === false){
+                if(inputValue.fname !=="" && inputValue.email !==""){
+                    const newDetails = {
+                        id : inputValue.id,
+                        fname : inputValue.fname,
+                        fatherName : inputValue.fatherName,
+                        //dob : null,
+                        gender : inputValue.gender,
+                        mobile : inputValue.mobile,
+                        email : inputValue.email,
+                        aadhar : inputValue.aadhar
+                    }
+                    setDetails([...details,newDetails])
                 }
-                setDetails([...details,newDetails])
+                else{
+                    alert("First Name and Email Id is required")
+                }
+            }else{
+                setDetails(
+                    details.map(items=>{
+                        if(items.id === inputValue.id){
+                            items = inputValue
+                        }
+                        return inputValue
+                    })
+                )
             }
-            else{
-                alert("First Name and Email Id is required")
-            }
-        }
-        else{
-            let oldState = [...details]
-
-            let editedUser = oldState.filter(items => {
-                return items.email === inputValue.email
-            })
-
-            console.log(editedUser)
-
-        }
     }   
 
     const getDetails = (editingRowData) => {
         setEditing(true)
         setUserData(editingRowData)
+        console.log(editingRowData.id)
     }
 
     const deleteUser = (userId) => {
