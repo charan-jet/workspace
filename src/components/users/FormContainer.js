@@ -4,6 +4,7 @@ import { Dialog } from 'primereact/dialog'
 import {Button} from 'primereact/button'         
 import InputFields from "./InputFields"
 import UsersTable from "./UsersTable"
+import {v4 as uuidv4} from 'uuid'
 
 //import Navbar from "./Navbar"
 
@@ -56,11 +57,11 @@ const FormContainer = () => {
     }
 
     
-    const addDetails = (inputValue) => {
+    const addDetails = (inputValue , id) => {
             if(editing === false){
                 if(inputValue.fname !=="" && inputValue.email !==""){
                     const newDetails = {
-                        id : inputValue.id,
+                        id : uuidv4(),
                         fname : inputValue.fname,
                         fatherName : inputValue.fatherName,
                         //dob : null,
@@ -75,21 +76,23 @@ const FormContainer = () => {
                     alert("First Name and Email Id is required")
                 }
             }else{
+                console.log(id)
                 setDetails(
                     details.map(items=>{
-                        if(items.id === inputValue.id){
-                            items = inputValue
+                        if(items.id === id){
+                            console.log(details[items.name])
                         }
                         return inputValue
                     })
-                )
+                    
+                )   
             }
     }   
 
     const getDetails = (editingRowData) => {
         setEditing(true)
         setUserData(editingRowData)
-        console.log(editingRowData.id)
+       
     }
 
     const deleteUser = (userId) => {

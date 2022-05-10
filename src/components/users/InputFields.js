@@ -3,12 +3,13 @@ import { InputText } from 'primereact/inputtext';
 import {Button} from 'primereact/button';
 /* import {Calendar} from 'primereact/calendar' */
 import {Dropdown} from 'primereact/dropdown'
-import {v4 as uuidv4} from 'uuid'
+
+import {useFormik} from 'formik'
 
 const InputFields = (props) => {
 
+    const [showMessage , setShowMessage] = useState(false)
     const [inputValue , setInputValue] = useState({
-        id : uuidv4(),
         fname : "",
         fatherName : "",
         //dob : null,
@@ -26,6 +27,11 @@ const InputFields = (props) => {
 
     /* let calendar = new Date() */
     /* const [date,setDate] = useState(calendar) */
+
+    const formik = useFormik({
+        initialValues: {inputValue}
+    })
+
     const inputHandler = (e) => {
        setInputValue({
            ...inputValue,
@@ -34,7 +40,7 @@ const InputFields = (props) => {
     }
     const submitHandler = (e) =>{
         e.preventDefault();
-            props.addUsers(inputValue);
+            props.addUsers(inputValue ,props.editingUser.id);
         setInputValue({
             fname : "",
             fatherName : "",

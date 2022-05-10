@@ -9,6 +9,7 @@ import "primeicons/primeicons.css";                                //icons
 import "./styles/main.css";
 
 import MasterContainer from './components/MasterContainer'
+
 ReactDOM.render(
     <React.StrictMode>
         <BrowserRouter>

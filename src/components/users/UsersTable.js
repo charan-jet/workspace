@@ -23,7 +23,7 @@ const UsersTable = (props) =>{
         )
     }) */
 
-    const editUser = (rowData,id) => {
+    const editUser = (rowData) => {
         props.getUser(rowData)
         props.showModal()
     }
