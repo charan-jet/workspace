@@ -76,13 +76,19 @@ const FormContainer = () => {
                     alert("First Name and Email Id is required")
                 }
             }else{
-                console.log(id)
                 setDetails(
                     details.map(items=>{
+                        
                         if(items.id === id){
-                            console.log(details[items.name])
+                            items.fname = inputValue.fname
+                            items.fatherName = inputValue.fatherName
+                            //dob : null,
+                            items.gender = inputValue.gender
+                            items.mobile = inputValue.mobile
+                            items.email = inputValue.email
+                            items.aadhar = inputValue.aadhar
                         }
-                        return inputValue
+                        return items    
                     })
                     
                 )   
