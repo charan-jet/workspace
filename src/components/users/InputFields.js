@@ -4,11 +4,10 @@ import {Button} from 'primereact/button';
 /* import {Calendar} from 'primereact/calendar' */
 import {Dropdown} from 'primereact/dropdown'
 
-import {useFormik} from 'formik'
+
 
 const InputFields = (props) => {
 
-    const [showMessage , setShowMessage] = useState(false)
     const [inputValue , setInputValue] = useState({
         fname : "",
         fatherName : "",
@@ -28,19 +27,17 @@ const InputFields = (props) => {
     /* let calendar = new Date() */
     /* const [date,setDate] = useState(calendar) */
 
-    const formik = useFormik({
-        initialValues: {inputValue}
-    })
-
+    
     const inputHandler = (e) => {
        setInputValue({
            ...inputValue,
            [e.target.name] : e.target.value
         })
     }
+    
     const submitHandler = (e) =>{
         e.preventDefault();
-            props.addUsers(inputValue ,props.editingUser.id);
+        props.addUsers(inputValue ,props.editingUser.id);
         setInputValue({
             fname : "",
             fatherName : "",
@@ -50,11 +47,9 @@ const InputFields = (props) => {
             email : "",
             aadhar : ""
         })
+
     }
     
-    const checkValues = (inputValue) =>{
-        props.closeModal(inputValue)
-    }
 
     const gender = ["Male", "Female", "Other"]
     
@@ -86,7 +81,7 @@ const InputFields = (props) => {
                 <InputText id="userAadhar" keyfilter="num" className="block" name="aadhar" onChange={inputHandler} value={inputValue.aadhar} />
             </div>
             <div style={{marginTop:"20px"}}>
-                <Button label="Submit" className="p-button-success" onClick={checkValues}/>
+                <Button label="Submit" className="p-button-success" />
             </div>
         </form>
         </>
