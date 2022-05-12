@@ -1,11 +1,11 @@
-import React, { useState,useEffect ,useRef} from "react"
+import React, { useState,useEffect ,} from "react"
 import { Card } from 'primereact/card' 
 import { Dialog } from 'primereact/dialog' 
 import {Button} from 'primereact/button'         
 import InputFields from "./InputFields"
 import UsersTable from "./UsersTable"
 import {v4 as uuidv4} from 'uuid'
-import {Toast} from 'primereact/toast'
+//import {Toast} from 'primereact/toast'
 
 //import Navbar from "./Navbar"
 
@@ -14,9 +14,9 @@ const FormContainer = () => {
     const [details , setDetails] = useState([]);    
     const [editing , setEditing] =useState(false)
     const [userData , setUserData] = useState([])
-    const [errorMessages , setErrorMessages] = useState([])
+    //const [errorMessages , setErrorMessages] = useState([])
 
-    const toast = useRef(null)
+    //const toast = useRef(null)
 
     useEffect(()=>{
         const allUsers = localStorage.getItem("users")
@@ -60,25 +60,45 @@ const FormContainer = () => {
         }
     }
 
-    const showToast = () => {   
-        toast.current.show(errorMessages);   
-      }
-    const validateForm = (data) => {
-        if(data.fname === ''){
-           console.log("name is required")
-           setErrorMessages(errors => [...errors,{severity:'error', summary: 'Error', detail:"name is required" , life: 3000}])
-           showToast()
-        } 
-
-        if(data.fatherName === ''){
-            console.log("father name is required")
-            setErrorMessages(errors => [...errors,{severity:'error', summary: 'Error', detail:"father name is required" , life: 3000}])
-           showToast()
-            
+   /*  const validateName = (data) =>{
+        if(data.fname===""){
+            const newMsg = {
+                severity:'error', 
+                summary: 'Error Message', 
+                detail:"Name is Required", 
+                life: 3000
+            }
+            setErrorMessages(error =>[...error,newMsg])
         }
     }
+
+    const validateFatherName = (data) => {
+        if(data.fatherName === ""){
+            const newMsg = {
+                severity:'error', 
+                summary: 'Error Message', 
+                detail:"Father Name is Required", 
+                life: 3000
+            }
+            setErrorMessages(error=>[...error,newMsg])
+        }
+    }
+    const showToast = () => {   
+        toast.current.show(errorMessages)      
+    //toast.current.show(errorMessages); 
+} 
+    const formValidate = (data) => {
+        validateName(data)
+        validateFatherName(data)
+        showToast()
+    }
+ */
+    
+
+    
+
     const addDetails = (inputValue , id) => {
-            validateForm(inputValue)
+            
             if(editing === false){
                 if(inputValue.fname !=="" && inputValue.email !==""){
                     const newDetails = {
@@ -93,12 +113,10 @@ const FormContainer = () => {
                     }
                     setDetails([...details,newDetails])
 
-                    if(details===true){
-                        setErrorMessages([])
-                    }
                 }
                 
-            }else{
+            }
+            else{
                 setDetails(
                     details.map(items=>{
                         if(items.id === id){
@@ -115,6 +133,7 @@ const FormContainer = () => {
                     
                 )   
             }
+
     }   
 
     const getDetails = (editingRowData) => {
@@ -132,7 +151,7 @@ const FormContainer = () => {
 
     return(
         <div>   
-            <Toast ref={toast}/>
+           
             <Card>
                 <Button label="Add User" className="p-button-success" onClick={addUser}/>   
                 <Dialog header="Add User" visible={visibile} modal="true" onHide={hideModal} draggable={false}>
