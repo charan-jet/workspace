@@ -21,16 +21,9 @@ const InputFields = (props) => {
         aadhar : ""
     });
     const toast = useRef(null)
-    useEffect(()=>{
-        if(props.editMode === true){
-            setInputValue(props.editingUser)
-        }
-    },[props.editMode,props.editingUser])
+    const gender = ["Male", "Female", "Other"]
 
-    /* let calendar = new Date() */
-    /* const [date,setDate] = useState(calendar) */
 
-    
     const inputHandler = (e) => {
        setInputValue({
            ...inputValue,
@@ -39,7 +32,7 @@ const InputFields = (props) => {
         
     }
 
-    //form validations start
+//form validations start
     const validateName = () =>{
         if(inputValue.fname===""){
             const newMsg = {
@@ -109,12 +102,13 @@ const InputFields = (props) => {
         }
     }
 //form validations end
+
     const showToast = (msg) => {    
         toast.current.show(msg); 
         return true
     }
 
-    //calling form validations in a function
+    //calling form validations in a function//
     const formValidate = () => {
         validateName() //for validating name
         validateFatherName()  //for validating father name
@@ -127,7 +121,6 @@ const InputFields = (props) => {
 
     const submitHandler = (e) =>{
         
-        console.log(errorMessages)
         e.preventDefault();
         if(errorMessages.length === 0){
             props.addUsers(inputValue ,props.editingUser.id);
@@ -151,12 +144,16 @@ const InputFields = (props) => {
         
     }
     
+    useEffect(()=>{
+        if(props.editMode === true){
+            setInputValue(props.editingUser)
+        }
+    },[props.editMode,props.editingUser])
 
-    const gender = ["Male", "Female", "Other"]
     
     return(
         <>
-         <Toast ref={toast}/>
+        <Toast ref={toast}/>
         <form onSubmit={submitHandler} >
             <div className="field" style={{marginBottom:"10px"}}>
                 <label htmlFor="fname">Full Name</label>

@@ -52,7 +52,7 @@ const UsersTable = (props) =>{
                 <Column key="mobile" field="mobile" header="Mobile"/>
                 <Column key="email" field="email" header="Email Id"/>
                 <Column key="aadhar" field="aadhar" header="Aadhar"/>
-                <Column body={actionBodyTemplate} exportable={false} />
+                <Column body={actionBodyTemplate} exportable={false}/>
             </DataTable>
         </div>
        </>

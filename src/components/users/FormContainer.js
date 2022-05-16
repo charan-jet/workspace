@@ -14,28 +14,10 @@ const FormContainer = () => {
     const [details , setDetails] = useState([]);    
     const [editing , setEditing] =useState(false)
     const [userData , setUserData] = useState([])
+    const [visibile,setVisibilty] = useState(false)
     //const [errorMessages , setErrorMessages] = useState([])
 
     //const toast = useRef(null)
-
-    useEffect(()=>{
-        const allUsers = localStorage.getItem("users")
-        const loadedUsers = JSON.parse(allUsers)
-        if(loadedUsers){
-           setDetails(loadedUsers)
-        }
-
-    },[])
-
-
-    useEffect(()=>{
-        const addUserDetails = JSON.stringify(details)
-        localStorage.setItem("users",addUserDetails)
-
-    },[details])
-    
-    const [visibile,setVisibilty] = useState(false)
-
     const showModal=()=>{
         setVisibilty(true)
     }
@@ -49,53 +31,8 @@ const FormContainer = () => {
         setEditing(false)
     }
 
-  
-
-    const closeModal = (inputValue) =>{
-        if(inputValue.fname ==="" && inputValue.emial ===""){
-            showModal()
-        }
-        else{
-            hideModal()
-        }
-    }
-
-   /*  const validateName = (data) =>{
-        if(data.fname===""){
-            const newMsg = {
-                severity:'error', 
-                summary: 'Error Message', 
-                detail:"Name is Required", 
-                life: 3000
-            }
-            setErrorMessages(error =>[...error,newMsg])
-        }
-    }
-
-    const validateFatherName = (data) => {
-        if(data.fatherName === ""){
-            const newMsg = {
-                severity:'error', 
-                summary: 'Error Message', 
-                detail:"Father Name is Required", 
-                life: 3000
-            }
-            setErrorMessages(error=>[...error,newMsg])
-        }
-    }
-    const showToast = () => {   
-        toast.current.show(errorMessages)      
-    //toast.current.show(errorMessages); 
-} 
-    const formValidate = (data) => {
-        validateName(data)
-        validateFatherName(data)
-        showToast()
-    }
- */
     
 
-    
 
     const addDetails = (inputValue , id) => {
             
@@ -148,6 +85,21 @@ const FormContainer = () => {
     }))
     }
 
+    useEffect(()=>{
+        const allUsers = localStorage.getItem("users")
+        const loadedUsers = JSON.parse(allUsers)
+        if(loadedUsers){
+           setDetails(loadedUsers)
+        }
+
+    },[])
+
+
+    useEffect(()=>{
+        const addUserDetails = JSON.stringify(details)
+        localStorage.setItem("users",addUserDetails)
+
+    },[details])
 
     return(
         <div>   
@@ -155,7 +107,7 @@ const FormContainer = () => {
             <Card>
                 <Button label="Add User" className="p-button-success" onClick={addUser}/>   
                 <Dialog header="Add User" visible={visibile} modal="true" onHide={hideModal} draggable={false}>
-                    <InputFields users={details} editingUser={userData} editMode={editing}  addUsers={addDetails} modal={showModal} closeModal={closeModal}/>
+                    <InputFields users={details} editingUser={userData} editMode={editing}  addUsers={addDetails}/>
                 </Dialog>
                 <UsersTable users={details}  getUser={getDetails} showModal={showModal} deleteUser={deleteUser}/>
             </Card>

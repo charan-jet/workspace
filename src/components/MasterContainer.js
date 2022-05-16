@@ -23,6 +23,7 @@ const MasterContainer = () => {
             <Navbar/>
             <Routes>
                 <Route path="/" element={<WorkspaceContanier users={userDetails} desks={deskDetails}/>}/>
+                <Route path="/workspace" element={<WorkspaceContanier users={userDetails} desks={deskDetails}/>}/>
                 <Route path="users" element={<FormContainer/>}/>
                 <Route path="desks" element={<DeskContainer />}/>
             </Routes>
