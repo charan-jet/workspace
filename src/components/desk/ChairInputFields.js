@@ -14,7 +14,7 @@ const ChairInputFields = (props) => {
     })
     const [errorMessages , setErrorMessages] = useState([])
     const toast = useRef(null)
-    const regExp = [0-9]
+    //const regExp = [0-9]
 
     //form validation start//
     const validateChairNumber = () => {
@@ -34,16 +34,7 @@ const ChairInputFields = (props) => {
             const newMsg = {
                 severity:'error', 
                 summary: 'Error', 
-                detail:"Chair Row is Required", 
-                life: 3000
-            }
-            setErrorMessages(error=>[...error,newMsg])
-        }
-        else if(inputValue.chairRow !== regExp){
-            const newMsg = {
-                severity:'error', 
-                summary: 'Error', 
-                detail:"Chair Row Must Be a Number", 
+                detail:"Chair Row is Required and Must Be a Number", 
                 life: 3000
             }
             setErrorMessages(error=>[...error,newMsg])
@@ -61,16 +52,6 @@ const ChairInputFields = (props) => {
             setErrorMessages(error=>[...error,newMsg])
         }
 
-        if(inputValue.chairColumn !== regExp){
-                const newMsg = {
-                    severity:'error', 
-                    summary: 'Error', 
-                    detail:"Chair Row Must Be a Number", 
-                    life: 3000
-                }
-                setErrorMessages(error=>[...error,newMsg])
-            }
-        
     }
 
     const validateChairStatus = () => {
