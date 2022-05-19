@@ -7,6 +7,7 @@ import "primereact/resources/primereact.min.css";                  //core css
 import "primeicons/primeicons.css";                                //icons
 
 import "./styles/main.css";
+import "primeflex/primeflex.css"
 
 import MasterContainer from './components/MasterContainer'
 

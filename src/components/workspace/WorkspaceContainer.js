@@ -9,7 +9,6 @@ import  {v4 as uuidv4} from 'uuid'
 const WokrspaceContainer = (props) => {
     const users = props.users;
     const desks = props.desks;
-    const workspaceDetails = props.workspaceDetails;
 
     const [visibility,setVisibility] = useState(false)
     const [workspace,setWorkspace] = useState([])
@@ -24,12 +23,14 @@ const WokrspaceContainer = (props) => {
     }
     
     const assignWorkspace = (inputvalues) => {
+
         const newWorkspace =  {
             id : uuidv4(),
             chairNumber : inputvalues.chairNumber,
             userName : inputvalues.userName,
-            validity : inputvalues.chairValidity
+            chairValidity : inputvalues.chairValidity
         }
+
         setWorkspace([...workspace,newWorkspace])
     }
 
@@ -43,22 +44,21 @@ const WokrspaceContainer = (props) => {
 
     },[])
 
-    useEffect(() => {
-        const workspaceString = JSON.stringify(workspace)
-        localStorage.setItem("workspace",workspaceString)
+    useEffect(()=>{
+        const workspaceDetails = JSON.stringify(workspace)
+        console.log(workspaceDetails)
+        localStorage.setItem("workspace" , workspaceDetails)
         
     },[workspace])
-
     
-
     return(
         <>
             <Card>
                 <Button label="Assign Chair" className="p-button-success" onClick={showModal} style={{marginBottom:"20px"}}/>
                 <Dialog visible={visibility} onHide={hideModal} draggable={false}>
-                    <AssignChairForm users={users} desks={desks} assignChair={assignWorkspace}/>
+                    <AssignChairForm users={users} desks={desks} assignChair={assignWorkspace} />
                 </Dialog>
-                <Workspace workspaceDetails={workspaceDetails}/>
+                <Workspace workspaceDetails={workspace}/>
 
             </Card>
         </>

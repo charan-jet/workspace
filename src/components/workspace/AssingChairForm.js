@@ -14,7 +14,7 @@ const AssignChairForm = (props) => {
     const [inputValues,setInputValues]=useState({
             chairNumber : null,
             userName : null,
-            chairvalidity  :null
+            chairValidity  :null
         })
     
     const usersList = users.map(items=>items.fname)
@@ -60,7 +60,7 @@ const AssignChairForm = (props) => {
     }
 
     const validateChairValidity = () => {
-        if(inputValues.chairvalidity === "" || inputValues.chairvalidity === null){
+        if(inputValues.chairValidity === "" || inputValues.chairValidity === null){
             const newMsg = {
                 severity:'error', 
                 summary: 'Error', 
@@ -94,9 +94,17 @@ const AssignChairForm = (props) => {
 
         if(errorMessages.length === 0){
            props.assignChair(inputValues)
+           setInputValues({
+            chairNumber : null,
+            userName : null,
+            chairValidity  :null
+           })
         }
     }
+
+
     return( 
+
         <>
             <Toast ref={toast}/>
             <form onSubmit={handleSubmit}>
@@ -110,13 +118,14 @@ const AssignChairForm = (props) => {
                 </div>
                 <div style={{marginBottom:"10px"}}>
                     <label htmlFor="chairvalid">Valid Upto</label>
-                    <Calendar className="form-input" id="chairValid" name="chairvalidity"  value={inputValues.chairvalidity} onChange={handleSelect} style={{marginTop:"5px"}} showIcon />
+                    <Calendar className="form-input" dateFormat="dd/mm/yy" id="chairValid" name="chairValidity"  value={inputValues.chairvalidity} onChange={handleSelect} style={{marginTop:"5px"}} showIcon />
                 </div>
                 <div style={{marginTop:"20px"}}>
                     <Button label="Submit" className="p-button-success" onClick={assignChairHandler}/>
                 </div>
             </form>
         </> 
+        
     )
 }
 
