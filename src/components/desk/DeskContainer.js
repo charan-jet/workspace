@@ -12,7 +12,7 @@ const DeskContainer = () =>{
     const [visibility, setVisibilty] = useState(false)
     const [editing , setEditing] = useState(false)
     const [chairData , setChairData] = useState([])
-
+    
     const showModal = () => {
         setVisibilty(true)
     }

@@ -28,7 +28,8 @@ const WokrspaceContainer = (props) => {
             id : uuidv4(),
             chairNumber : inputvalues.chairNumber,
             userName : inputvalues.userName,
-            chairValidity : inputvalues.chairValidity
+            chairValidity : inputvalues.chairValidity,
+            assigned : true
         }
 
         setWorkspace([...workspace,newWorkspace])
@@ -50,6 +51,7 @@ const WokrspaceContainer = (props) => {
         localStorage.setItem("workspace" , workspaceDetails)
         
     },[workspace])
+    
     
     return(
         <>

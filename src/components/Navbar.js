@@ -11,6 +11,10 @@ const Navbar = () =>{
             command : () => {navigate("/")}
         },
         {
+            label : "Workspace",
+            command : () => {navigate("/workspace")}
+        },
+        {
             label : "Users",
             command :()=>{navigate("/users")}
         },  

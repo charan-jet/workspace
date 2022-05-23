@@ -3,6 +3,7 @@ import {Button} from 'primereact/button'
 import {Dropdown} from 'primereact/dropdown'
 import {Calendar} from 'primereact/calendar'
 import {Toast} from "primereact/toast"
+import { format } from "date-fns";
 
 const AssignChairForm = (props) => {
 
@@ -10,11 +11,13 @@ const AssignChairForm = (props) => {
     const users = props.users
     const [errorMessages , setErrorMessages] = useState([])
     const toast = useRef(null)
+    //const workspaceData = useState([])
 
     const [inputValues,setInputValues]=useState({
             chairNumber : null,
             userName : null,
-            chairValidity  :null
+            chairValidity  :null,
+            assigned : false
         })
     
     const usersList = users.map(items=>items.fname)
@@ -25,9 +28,27 @@ const AssignChairForm = (props) => {
         
         setInputValues({
             ...inputValues,
-            [e.target.name] : e.value
+            [e.target.name] : e.target.value,
+           
+
+        })
+
+    }
+
+    const handleDate = (e) =>{
+
+        const validity = new Date(e.value)
+        const date = format( validity, "dd/MM/yyyy")
+
+        console.log(date)
+        
+        setInputValues({
+            ...inputValues,
+            chairValidity : date
         })
     }
+
+    console.log(inputValues.chairValidity)
 
     const showToast = (msg) => {    
         toast.current.show(msg); 
@@ -83,6 +104,8 @@ const AssignChairForm = (props) => {
         validateForm()
     }
 
+
+
     const handleSubmit = (e) => {
         e.preventDefault()
 
@@ -100,6 +123,8 @@ const AssignChairForm = (props) => {
             chairValidity  :null
            })
         }
+
+
     }
 
 
@@ -118,7 +143,7 @@ const AssignChairForm = (props) => {
                 </div>
                 <div style={{marginBottom:"10px"}}>
                     <label htmlFor="chairvalid">Valid Upto</label>
-                    <Calendar className="form-input" dateFormat="dd/mm/yy" id="chairValid" name="chairValidity"  value={inputValues.chairvalidity} onChange={handleSelect} style={{marginTop:"5px"}} showIcon />
+                    <Calendar className="form-input" dateFormat="dd/mm/yy" id="chairValid" name="chairValidity"  value={inputValues.chairvalidity} onChange={handleDate} style={{marginTop:"5px"}} showIcon />
                 </div>
                 <div style={{marginTop:"20px"}}>
                     <Button label="Submit" className="p-button-success" onClick={assignChairHandler}/>
