@@ -3,7 +3,7 @@ import Workspace from './Workspace'
 import {Button} from 'primereact/button'
 import {Dialog} from 'primereact/dialog'
 import {Card} from 'primereact/card' 
-import AssignChairForm from './AssingChairForm'
+import AssignChairForm from './AssignChairForm'
 import  {v4 as uuidv4} from 'uuid'
 
 const WokrspaceContainer = (props) => {
