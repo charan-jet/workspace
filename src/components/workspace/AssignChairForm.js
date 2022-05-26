@@ -29,12 +29,12 @@ const AssignChairForm = (props) => {
         setInputValues({
             ...inputValues,
             [e.target.name] : e.target.value,
-           
 
         })
 
     }
 
+    
     const handleDate = (e) =>{
 
         const validity = new Date(e.value)
@@ -47,8 +47,6 @@ const AssignChairForm = (props) => {
             chairValidity : date
         })
     }
-
-    console.log(inputValues.chairValidity)
 
     const showToast = (msg) => {    
         toast.current.show(msg); 
@@ -117,11 +115,17 @@ const AssignChairForm = (props) => {
 
         if(errorMessages.length === 0){
            props.assignChair(inputValues)
+            
+           inputValues.assigned = true
+            
+           console.log(inputValues)
            setInputValues({
             chairNumber : null,
             userName : null,
-            chairValidity  :null
+            chairValidity  :null,
+            assigned : false
            })
+
         }
 
 

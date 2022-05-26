@@ -29,12 +29,13 @@ const WokrspaceContainer = (props) => {
             chairNumber : inputvalues.chairNumber,
             userName : inputvalues.userName,
             chairValidity : inputvalues.chairValidity,
-            assigned : true
+            assigned : inputvalues.assigned
         }
 
         setWorkspace([...workspace,newWorkspace])
-    }
 
+    }
+    
     useEffect(() => {
         const getWorkspace = localStorage.getItem("workspace")
         const loadedWorkspace = JSON.parse(getWorkspace)
@@ -46,12 +47,10 @@ const WokrspaceContainer = (props) => {
     },[])
 
     useEffect(()=>{
-        const workspaceDetails = JSON.stringify(workspace)
-        console.log(workspaceDetails)
-        localStorage.setItem("workspace" , workspaceDetails)
-        
+        const allWorkspace = JSON.stringify(workspace)
+        localStorage.setItem("workspace" , allWorkspace)
+ 
     },[workspace])
-    
     
     return(
         <>

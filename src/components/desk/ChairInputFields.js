@@ -10,7 +10,7 @@ const ChairInputFields = (props) => {
         chairNumber : "",
         chairRow : "",
         chairColumn : "",
-        chairStatus : null
+        chairStatus : ""
     })
     const [errorMessages , setErrorMessages] = useState([])
     const toast = useRef(null)
@@ -87,7 +87,7 @@ const ChairInputFields = (props) => {
             [e.target.name] : e.target.value
         })
     }
-    const stausOptions = ["Occupied", "Vacant"]
+    const stausOptions = [  , "Vacant"]
 
    /*  const handleSelect = (e) => {
         setChairStatus(e.value)

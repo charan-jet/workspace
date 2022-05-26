@@ -7,11 +7,12 @@ import { Button } from "primereact/button"
 import {v4 as uuidv4} from 'uuid'
 
 
-const DeskContainer = () =>{
+const DeskContainer = (props) =>{
     const [desk , setDesk] = useState([])
     const [visibility, setVisibilty] = useState(false)
     const [editing , setEditing] = useState(false)
     const [chairData , setChairData] = useState([])
+    const worksapce = props.worksapce
     
     const showModal = () => {
         setVisibilty(true)
@@ -28,7 +29,7 @@ const DeskContainer = () =>{
                 chairNumber : inputValues.chairNumber,
                 chairRow : inputValues.chairRow,
                 chairColumn : inputValues.chairColumn,
-                chairStatus : inputValues.chairStatus
+                chairStatus : inputValues.chairStatus,
             }
             setDesk([...desk,newDesk])
         }else{
@@ -43,7 +44,7 @@ const DeskContainer = () =>{
             })
         }
     } 
-
+    console.log(desk)
     const deleteDesk = (data) => {
         setDesk(desk.filter(chair => {
             return data !== chair
@@ -56,6 +57,7 @@ const DeskContainer = () =>{
        
     }
 
+    
     useEffect(()=>{
         const allDesks = localStorage.getItem("allDesks")
         const loadedDesks = JSON.parse(allDesks)
@@ -64,13 +66,14 @@ const DeskContainer = () =>{
             console.log(loadedDesks)
             setDesk(loadedDesks)
         }
-        
+
     },[])
 
     useEffect(()=>{
 
         const newDesk = JSON.stringify(desk)
         localStorage.setItem("allDesks", newDesk)   
+
 
     },[desk])
 
@@ -79,9 +82,9 @@ const DeskContainer = () =>{
             <Card>
                 <Button label="Add Chair" className="p-button-success" onClick={showModal}/>
                 <Dialog visible={visibility} onHide={hideModal} draggable={false}>
-                    <ChairInputFields  addChair={addDesk} editingChair={chairData} editMode={editing} showModal={showModal}/>
+                    <ChairInputFields  addChair={addDesk} editingChair={chairData} editMode={editing} showModal={showModal} />
                 </Dialog>
-                <Chairs chairs={desk} deleteDesk={deleteDesk} getChair={getDesk} showModal={showModal}/>
+                <Chairs chairs={desk} deleteDesk={deleteDesk} getChair={getDesk} showModal={showModal} />
             </Card>
         </>
     )

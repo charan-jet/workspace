@@ -6,7 +6,6 @@ import {Column} from 'primereact/column'
 const Workspace = (props) => {
     const emptyMessage = "No data Available please add some Chairs and Users"
     const workspace = props.workspaceDetails
-    console.log(workspace)
 
     return(
         <>

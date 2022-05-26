@@ -13,6 +13,7 @@ const MasterContainer = () => {
     
     const [userDetails , setUserDetails] = useState()
     const [deskDetails , setDeskDetails] = useState()
+    const [workspaceDetails , setWorkspaceDetails] = useState()
 
     //const [deskDetails,setDeskDetails] = useState([])
     useEffect(() => {
@@ -28,6 +29,12 @@ const MasterContainer = () => {
             setDeskDetails(loadedDesks)
         }
         
+        const allWorkspace = localStorage.getItem("workspace")
+        const loadedWorkspaces = JSON.parse(allWorkspace)
+
+        if(loadedWorkspaces){
+            setWorkspaceDetails(loadedWorkspaces)
+        }
     },[])
 
     
@@ -38,7 +45,7 @@ const MasterContainer = () => {
                 <Route path="/" element={<Master/>}/>
                 <Route path="workspace" element={<WorkspaceContanier users={userDetails} desks={deskDetails} />}/>
                 <Route path="users" element={<FormContainer/>}/>
-                <Route path="desks" element={<DeskContainer />}/>
+                <Route path="desks" element={<DeskContainer  workspace={workspaceDetails}/>}/>
             </Routes>
         </>
     )
