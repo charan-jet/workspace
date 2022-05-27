@@ -13,6 +13,7 @@ const Master = () => {
 
     const getWorkspaceDetails = (e) => {
         deskDetails.current.toggle(e)
+
         setWorkspaceDetails({
             id : "",
             chairNumber : e.target.name,
@@ -20,6 +21,7 @@ const Master = () => {
             chairValidity : "Not Set",
             assigned : false  
         })
+
         if(e.target.name){
 
             workspaceData.filter(items => {
@@ -32,7 +34,7 @@ const Master = () => {
                        assigned : items.assigned    
                     })
                 }
-                return items
+                return workspaceData
             })
 
         }
@@ -77,12 +79,20 @@ const Master = () => {
                    <div className="grid">
                         {
                            desks.map(items =>{
-                                
-                                return (
-                                        <div key={items.id} className="col-1" style={{width:"10%"}} > 
-                                            <Button icon="pi pi-user" name={items.chairNumber} className="p-button-text mr-2 p-button-warning p-button-rounded p-button-sm" onClick={getWorkspaceDetails}/>
-                                        </div>
-                                        )
+                                    if(items.chairStatus === "Occupied"){
+                                        return (
+                                            <div key={items.id} className="col-1" style={{width:"10%"}} > 
+                                                <Button icon="pi pi-user" name={items.chairNumber} className="p-button-text mr-2 p-button-success p-button-rounded p-button-sm" onClick={getWorkspaceDetails}/>
+                                            </div>
+                                            )
+                                    }else if(items.chairStatus === "Vacant"){
+                                        return (
+                                            <div key={items.id} className="col-1" style={{width:"10%"}} > 
+                                                <Button icon="pi pi-user" name={items.chairNumber} className="p-button-text mr-2 p-button-danger p-button-rounded p-button-sm" onClick={getWorkspaceDetails}/>
+                                            </div>
+                                            )
+                                    }
+                                    return items
                             })
                         
                         }   

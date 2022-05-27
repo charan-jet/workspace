@@ -87,7 +87,7 @@ const ChairInputFields = (props) => {
             [e.target.name] : e.target.value
         })
     }
-    const stausOptions = [  , "Vacant"]
+    const stausOptions = ["Occupied"  , "Vacant"]
 
    /*  const handleSelect = (e) => {
         setChairStatus(e.value)

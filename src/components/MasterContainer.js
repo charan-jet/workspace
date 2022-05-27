@@ -36,7 +36,7 @@ const MasterContainer = () => {
             setWorkspaceDetails(loadedWorkspaces)
         }
     },[])
-
+    console.log(workspaceDetails)
     
     return(
         <>

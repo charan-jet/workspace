@@ -8,12 +8,15 @@ import {v4 as uuidv4} from 'uuid'
 
 
 const DeskContainer = (props) =>{
+
     const [desk , setDesk] = useState([])
     const [visibility, setVisibilty] = useState(false)
     const [editing , setEditing] = useState(false)
     const [chairData , setChairData] = useState([])
-    const worksapce = props.worksapce
+    const workspace = props.workspace
     
+    console.log(workspace)
+
     const showModal = () => {
         setVisibilty(true)
     }
@@ -44,11 +47,39 @@ const DeskContainer = (props) =>{
             })
         }
     } 
-    console.log(desk)
-    const deleteDesk = (data) => {
-        setDesk(desk.filter(chair => {
+
+
+    if(workspace){
+        desk.filter(items=>{
+            workspace.filter(workspace => {
+                if(items.chairNumber === workspace.chairNumber){
+                    items.chairStatus = "Occupied"
+                }
+                return workspace
+            })
+            return items
+        })
+    }
+
+    
+    const deleteDesk = (data) => { 
+        if(workspace){
+            workspace.filter(items=>{
+                if(items.chairNumber === data.chairNumber){
+                    alert("User is assigned to this chair Are you sure you want to delete")   
+                }
+                else{
+                    setDesk(desk.filter(chair => {
+                        return data !== chair
+                    }))
+                }
+                return workspace
+            })
+        }
+        /* setDesk(desk.filter(chair => {
             return data !== chair
-        }))
+        })) */
+
     }
 
     const getDesk = (editingRowData) => {
@@ -84,7 +115,7 @@ const DeskContainer = (props) =>{
                 <Dialog visible={visibility} onHide={hideModal} draggable={false}>
                     <ChairInputFields  addChair={addDesk} editingChair={chairData} editMode={editing} showModal={showModal} />
                 </Dialog>
-                <Chairs chairs={desk} deleteDesk={deleteDesk} getChair={getDesk} showModal={showModal} />
+                <Chairs chairs={desk} deleteDesk={deleteDesk} getChair={getDesk} showModal={showModal} workspace={workspace}/>
             </Card>
         </>
     )

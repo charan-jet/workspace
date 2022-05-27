@@ -1,4 +1,4 @@
-import React,{useState , useRef} from 'react'
+import React,{useState , useRef ,useEffect} from 'react'
 import {Button} from 'primereact/button'
 import {Dropdown} from 'primereact/dropdown'
 import {Calendar} from 'primereact/calendar'
@@ -7,8 +7,8 @@ import { format } from "date-fns";
 
 const AssignChairForm = (props) => {
 
-    const desks = props.desks
-    const users = props.users
+    const [desks,setDesks] = useState(props.desks)
+    const [users,setUsers] = useState(props.users)
     const [errorMessages , setErrorMessages] = useState([])
     const toast = useRef(null)
     //const workspaceData = useState([])
@@ -22,6 +22,24 @@ const AssignChairForm = (props) => {
     
     const usersList = users.map(items=>items.fname)
     const chairList = desks.map((items)=>items.chairNumber)
+
+    useEffect(()=>{
+
+        const allDesks =  localStorage.getItem("allDesks")
+        const loadedDesks = JSON.parse(allDesks)
+
+        if(loadedDesks){
+            setDesks(loadedDesks)
+        }
+
+        const allUsers = localStorage.getItem("users")
+        const loadedUsers = JSON.parse(allUsers)
+
+        if(loadedUsers){
+            setUsers(loadedUsers)
+        }
+        
+    },[])
 
     const handleSelect = (e) => {
         console.log(e.target.name,e.target.value)
